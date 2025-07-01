@@ -1,0 +1,57 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+@Time    : 2025/6/26 14:49
+@Author  : lgy
+@File    : rename_and_save_images.py.py
+@Software: 111python_code
+@Desc    :  # 读取指定文件夹中的所有图片文件，并将它们重命名并保存到指定文件夹。
+"""
+
+import os
+from PIL import Image  # 确保安装了 Pillow 库: pip install Pillow
+
+def rename_and_save_images(input_folder, output_folder):
+    """
+    读取指定文件夹中的所有图片文件，并将它们重命名并保存到指定文件夹。
+    重命名规则：seaside sparrow + 顺序编号 + .jpg
+    """
+
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)  # 如果输出文件夹不存在，则创建它
+
+    image_files = [f for f in os.listdir(input_folder) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp',".webp",".jfif",".avif"))]
+    image_files.sort()  # 可选：按文件名排序，确保顺序一致
+
+    for i, filename in enumerate(image_files):
+        try:
+            # 构建完整的文件路径
+            input_path = os.path.join(input_folder, filename)
+
+            # 打开图片
+            img = Image.open(input_path)
+
+            # 构建新的文件名
+            new_filename = f"American goldfinch_{i+1}.jpg"
+            output_path = os.path.join(output_folder, new_filename)
+
+            # 保存为 JPG 格式
+            img = img.convert("RGB")  # 转换为 RGB 模式，确保可以保存为 JPG
+            img.save(output_path, "JPEG")  # 使用 JPEG 编码保存
+
+            print(f"已处理: {filename} -> {new_filename}")
+
+        except Exception as e:
+            print(f"处理 {filename} 时出错: {e}")
+
+
+if __name__ == '__main__':
+  
+    # 设置输入和输出文件夹
+    input_folder = r"D:\111111111文档数据\龙之源鸟类识别\American goldfinch"  # 替换为你的图片文件夹路径
+    output_folder = r"D:\111111111文档数据\龙之源鸟类识别\American goldfinch1"  # 替换为你想要保存图片的文件夹路径
+    
+    # 调用函数进行处理
+    rename_and_save_images(input_folder, output_folder)
+    
+    print("处理完成！")
