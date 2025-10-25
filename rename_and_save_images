@@ -3,7 +3,7 @@
 """
 @Time    : 2025/6/26 14:49
 @Author  : lgy
-@File    : rename_and_save_images.py.py
+@File    : rename_and_save_images.py
 @Software: 111python_code
 @Desc    :  # 读取指定文件夹中的所有图片文件，并将它们重命名并保存到指定文件夹。
 """
