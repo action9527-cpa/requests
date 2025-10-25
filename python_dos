@@ -1,0 +1,24 @@
+#用python执行dos命令
+
+import os
+import subprocess
+import time
+
+def dos_command(cmd,encoding='gbk'):
+    """
+    执行dos命令
+    :param cmd:
+    :return:
+    """
+    # 创建一个Popen对象，用于执行dos命令
+    p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    # 等待命令执行完成，并获取输出结果
+    stdout, stderr = p.communicate()
+
+    # 返回命令执行结果
+    return stdout.decode(encoding), stderr.decode()
+
+if __name__ == '__main__':
+    dos="ipconfig"
+    a,b=dos_command(dos)
+    print(a)
